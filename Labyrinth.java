@@ -336,9 +336,9 @@ public class Labyrinth extends JFrame implements MouseListener,MouseMotionListen
             int gridX = roomX * 2;
             int gridY = roomY * 2;
             
-            // 四方の壁をチェック（常に行う）
-            if (isSurroundedByWalls(gridX, gridY)) {
-                JOptionPane.showMessageDialog(null, "四方を壁で囲まれた場所には設置できません", "エラー", JOptionPane.ERROR_MESSAGE);
+            // 完全に壁で囲まれているかチェック（常に行う）
+            if (isCompletelyWalled(gridX, gridY)) {
+                JOptionPane.showMessageDialog(null, "四方を壁で完全に囲まれた場所には設置できません", "エラー", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
@@ -444,23 +444,16 @@ public class Labyrinth extends JFrame implements MouseListener,MouseMotionListen
         return roomY * 2;
     }
 
-    // 特定のグリッド座標が四方を壁に囲まれているかチェックするメソッド
-    private boolean isSurroundedByWalls(int gridX, int gridY) {
-        int surroundingWalls = 0;
+    // 特定のグリッド座標が四方を壁に囲まれているかチェックするメソッド（完全に囲まれた場合のみtrue）
+    private boolean isCompletelyWalled(int gridX, int gridY) {
+        // 上下左右4方向すべてに壁があるかチェック
+        boolean topWall = gridY > 0 && grid[gridY-1][gridX] == 1;
+        boolean bottomWall = gridY < 10 && grid[gridY+1][gridX] == 1;
+        boolean leftWall = gridX > 0 && grid[gridY][gridX-1] == 1;
+        boolean rightWall = gridX < 10 && grid[gridY][gridX+1] == 1;
         
-        // 上の壁をチェック
-        if (gridY > 0 && grid[gridY-1][gridX] == 1) surroundingWalls++;
-        
-        // 下の壁をチェック
-        if (gridY < 10 && grid[gridY+1][gridX] == 1) surroundingWalls++;
-        
-        // 左の壁をチェック
-        if (gridX > 0 && grid[gridY][gridX-1] == 1) surroundingWalls++;
-        
-        // 右の壁をチェック
-        if (gridX < 10 && grid[gridY][gridX+1] == 1) surroundingWalls++;
-        
-        return surroundingWalls >= 3; // 3つ以上の壁で囲まれている場合はtrue
+        // 4方向すべてに壁がある場合のみtrue
+        return topWall && bottomWall && leftWall && rightWall;
     }
 
     // 指定されたグリッド上で経路が存在するか確認するメソッド
