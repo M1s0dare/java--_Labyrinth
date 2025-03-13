@@ -60,6 +60,7 @@ public class Labyrinth extends JFrame implements MouseListener,MouseMotionListen
     private ImageIcon firstBackgroundImage;   // 最初の画面の背景画像
     private ImageIcon secondBackgroundImage;  // 対戦画面の背景画像
 
+
     public Labyrinth() {
         // グリッドの初期化（11x11）
         grid = new int[11][11];
@@ -673,7 +674,7 @@ public class Labyrinth extends JFrame implements MouseListener,MouseMotionListen
         }
     }
 
-    // 押されたボタンの判定用，部屋，壁の順（後付けしたものなので統合するかも）
+    // 押されたボタンの判定用，部屋，壁の順（後付けしたものなので統合するかも） 
     private boolean isRoomButton(JButton button) {//roomボタンが押されたときの判定用
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
