@@ -5,6 +5,12 @@
 仕様書：java演仕様書  
 ※時間があれば仕様書通りに作り直すつもり  
 
+## 動作動画
+
+https://github.com/user-attachments/assets/0b4052ba-ec57-4ea4-bfbe-e6bdb8db4105
+
+
+
 以下にjava_report.docxの内容を記述する．  
 
 ## 1. ゲームの起動方法  
